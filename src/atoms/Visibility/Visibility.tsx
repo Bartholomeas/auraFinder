@@ -1,4 +1,4 @@
-import visibilityIcon from '../../assets/visibility.svg';
+import visibilityIcon from '../../assets/icons/visibility.svg';
 
 const Visibility = ({ children }: { children: string }) => {
 	return (

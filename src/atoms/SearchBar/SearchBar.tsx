@@ -1,11 +1,30 @@
-const SearchBar = ({ onClickFunc }: { onClickFunc: () => {} }) => {
+import { useState } from 'react';
+
+const SearchBar = ({ onClickFunc }: { onClickFunc: (arg0: any) => Promise<void> }) => {
+	const [inputValue, setInputValue] = useState('');
+
 	return (
 		<div className='flex justify-center items-end w-fit p-1 border-b-[1px] border-solid border-white'>
 			<div className='flex flex-col items-center'>
-				<label className='opacity-50 translate-x-[20px]'>Search city</label>
-				<input className='bg-transparent ' />
+				<label className='opacity-50 translate-x-[20px]' htmlFor='city'>
+					Search city
+				</label>
+				<input
+					className='bg-transparent'
+					type='text'
+					id='city'
+					name='city'
+					onChange={e => {
+						setInputValue(e.target.value);
+					}}
+				/>
 			</div>
-			<button className='h-fit px-2'>
+			<button
+				className='h-fit px-2'
+				onClick={() => {
+					console.log(inputValue);
+					onClickFunc(inputValue);
+				}}>
 				<svg className='w-[20px]' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'>
 					<path d='M9.5 9.5L12.5 12.5' stroke='white' strokeWidth='1.5' strokeLinecap='round' strokeLinejoin='round' />
 					<path

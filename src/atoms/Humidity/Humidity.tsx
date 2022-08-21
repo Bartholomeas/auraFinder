@@ -1,4 +1,4 @@
-import humidityIcon from '../../assets/humidity.svg';
+import humidityIcon from '../../assets/icons/humidity.svg';
 
 const Humidity = ({ children }: { children: string }) => {
 	return (

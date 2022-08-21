@@ -1,4 +1,4 @@
-import windIcon from '../../assets/wind.svg';
+import windIcon from '../../assets/icons/wind.svg';
 
 const Wind = ({ children, direction }: { children: string; direction: string }) => {
 	return (

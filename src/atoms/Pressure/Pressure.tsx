@@ -1,4 +1,4 @@
-import pressureIcon from '../../assets/pressure.svg';
+import pressureIcon from '../../assets/icons/pressure.svg';
 
 const Pressure = ({ children }: { children: string }) => {
 	return (
