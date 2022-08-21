@@ -1,6 +1,6 @@
 const SearchBar = ({ onClickFunc }: { onClickFunc: () => {} }) => {
 	return (
-		<div className='flex justify-center items-end border-b-2 border-solid border-white p-1'>
+		<div className='flex justify-center items-end w-fit p-1 border-b-[1px] border-solid border-white'>
 			<div className='flex flex-col items-center'>
 				<label className='opacity-50 translate-x-[20px]'>Search city</label>
 				<input className='bg-transparent ' />

@@ -28,25 +28,26 @@ const AppBody = () => {
 	// useEffect(() => {}, []);
 	return (
 		<div
-			className='flex flex-col items-center gap-6 w-full h-full px-4 py-6 backdrop-blur-sm bg-black/30 rounded-lg text-basic-text 
-		md:flex-row md:justify-between md:h-3/5 md:w-5/6 md:px-6'>
+			className='flex flex-col items-center gap-3 w-full h-full px-4 py-6 backdrop-blur-sm bg-black/30 rounded-lg text-basic-text 
+		 sm:h-4/5 md:justify-between md:h-3/5 md:w-5/6 md:px-6'>
 			<SearchBar onClickFunc={sendRequest} />
-
-			<InfosContainer>
-				<City>Wieluń</City>
-				<Temperature>20°C</Temperature>
-				<TemperatureFelt>felt like 21°C</TemperatureFelt>
-				<Weather>Shower rain</Weather>
-			</InfosContainer>
-			<InfosContainer>
-				<Humidity>80</Humidity>
-				<Pressure>1040</Pressure>
-				<Wind direction='N'>3</Wind>
-				<Visibility>5.3</Visibility>
-			</InfosContainer>
-			<InfosContainer>
-				<WeatherIcon />
-			</InfosContainer>
+			<div className='flex flex-col items-center h-full gap-5 w-full sm:justify-between sm:flex-row'>
+				<InfosContainer>
+					<City>Wieluń</City>
+					<Temperature>20°C</Temperature>
+					<TemperatureFelt>felt like 21°C</TemperatureFelt>
+					<Weather>Shower rain</Weather>
+				</InfosContainer>
+				<InfosContainer>
+					<Humidity>80</Humidity>
+					<Pressure>1040</Pressure>
+					<Wind direction='N'>3</Wind>
+					<Visibility>5.3</Visibility>
+				</InfosContainer>
+				<InfosContainer isIcon={true}>
+					<WeatherIcon />
+				</InfosContainer>
+			</div>
 		</div>
 	);
 };
