@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import axios from 'axios';
 import City from '../../atoms/City/City';
 import InfosContainer from '../../molecules/InfosContainer/InfosContainer';
 import Temperature from '../../atoms/Temperature/Temperature';
@@ -7,12 +9,29 @@ import Humidity from '../../atoms/Humidity/Humidity';
 import Pressure from '../../atoms/Pressure/Pressure';
 import Wind from '../../atoms/Wind/Wind';
 import Visibility from '../../atoms/Visibility/Visibility';
+import WeatherIcon from '../../atoms/WeatherIcon/WeatherIcon';
+import SearchBar from '../../atoms/SearchBar/SearchBar';
 
 const AppBody = () => {
+	const sendRequest = async () => {
+		// `api.openweathermap.org/data/2.5/weather?q=Wieluń&units=metric&appid=${import.meta.env.VITE_API_KEY}`;
+		try {
+			const data = await axios.get(
+				`https://api.openweathermap.org/data/2.5/weather?q=wieluń&units=metric&appid=${import.meta.env.VITE_API_KEY}`
+			);
+			console.log(data);
+		} catch {
+			throw new Error('Something went wrong');
+		}
+	};
+
+	// useEffect(() => {}, []);
 	return (
 		<div
-			className='flex flex-col items-center gap-10 w-full h-full px-4 py-6 backdrop-blur-sm bg-black/30 rounded-lg text-basic-text 
+			className='flex flex-col items-center gap-6 w-full h-full px-4 py-6 backdrop-blur-sm bg-black/30 rounded-lg text-basic-text 
 		md:flex-row md:justify-between md:h-3/5 md:w-5/6 md:px-6'>
+			<SearchBar onClickFunc={sendRequest} />
+
 			<InfosContainer>
 				<City>Wieluń</City>
 				<Temperature>20°C</Temperature>
@@ -22,8 +41,11 @@ const AppBody = () => {
 			<InfosContainer>
 				<Humidity>80</Humidity>
 				<Pressure>1040</Pressure>
-				<Wind direction='N'>3km/h</Wind>
+				<Wind direction='N'>3</Wind>
 				<Visibility>5.3</Visibility>
+			</InfosContainer>
+			<InfosContainer>
+				<WeatherIcon />
 			</InfosContainer>
 		</div>
 	);

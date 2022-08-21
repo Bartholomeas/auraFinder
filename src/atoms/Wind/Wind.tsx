@@ -2,10 +2,11 @@ import windIcon from '../../assets/wind.svg';
 
 const Wind = ({ children, direction }: { children: string; direction: string }) => {
 	return (
-		<div className='flex items-center justify-center gap-1'>
+		<div className='flex items-center justify-center gap-1 text-xl'>
 			<img src={windIcon} className='w-[15px] mr-2' alt='Water drop icon' />
-			<p className='font-light'>Humidity:</p>
-			<p className=''>{children}%</p>
+			<p className='font-light'>Wind:</p>
+			<p className=''>{children}km/h</p>
+			<p className='text-bold text-red-500'> to {direction}</p>
 		</div>
 	);
 };
