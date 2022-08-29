@@ -22,7 +22,6 @@ const SearchBar = ({ onClickFunc }: { onClickFunc: (arg0: any) => Promise<void> 
 			<button
 				className='h-fit px-2'
 				onClick={() => {
-					console.log(inputValue);
 					onClickFunc(inputValue);
 				}}>
 				<svg className='w-[20px]' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'>

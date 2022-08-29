@@ -1,6 +1,6 @@
-import windIcon from '../../assets/icons/wind.svg';
+import windIcon from '../../../assets/icons/wind.svg';
 
-const Wind = ({ children, direction }: { children: string; direction: string }) => {
+const Wind = ({ children, direction }: { children: number | null; direction: string }) => {
 	return (
 		<div className='flex items-center justify-center gap-1 text-xl'>
 			<img src={windIcon} className='w-[15px] mr-2' alt='Water drop icon' />
