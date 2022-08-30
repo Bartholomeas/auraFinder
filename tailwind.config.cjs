@@ -7,7 +7,7 @@ module.exports = {
 				'basic-text': '#CFD0D0',
 			},
 			backgroundImage: {
-				'rain-image': 'url("./src/assets/img/rainImg.jpg")',
+				'rain-image': 'url("./src/assets/img/09.jpg")',
 			},
 		},
 	},

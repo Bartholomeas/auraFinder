@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import City from '../../atoms/City/City';
 import InfosContainer from '../../molecules/InfosContainer/InfosContainer';
@@ -11,40 +11,19 @@ import Wind from '../../atoms/Wind/Wind';
 import Visibility from '../../atoms/Visibility/Visibility';
 import WeatherIcon from '../../atoms/WeatherIcon/WeatherIcon';
 import SearchBar from '../../atoms/SearchBar/SearchBar';
-
-interface Props {
-	choosenCity: string;
-}
+import { useWeatherHandler } from '../../../state/useWeatherReducer';
 
 const AppBody = () => {
-	const [weatherData, setWeatherData] = useState({
-		main: {
-			humidity: null,
-			pressure: null,
-			temp: null,
-			feels_like: null,
-		},
-		name: '',
-		visibility: null,
-		weather: [
-			{
-				icon: '03d',
-				main: 'clear',
-			},
-		],
-		wind: { deg: null, speed: null },
-	});
+	const { state, dispatch } = useWeatherHandler();
 
-	const getWeatherData = async (choosenCity: Props) => {
-		console.log(choosenCity);
+	const getWeatherData = async (choosenCity: string) => {
 		try {
 			const data = await axios.get(
 				`https://api.openweathermap.org/data/2.5/weather?q=${choosenCity}&units=metric&appid=${
 					import.meta.env.VITE_API_KEY
 				}`
 			);
-			console.log(data);
-			setWeatherData(data.data);
+			dispatch({ type: 'SET_WEATHER_DATA', payload: data.data });
 		} catch {
 			throw new Error('Something went wrong');
 		}
@@ -56,23 +35,23 @@ const AppBody = () => {
 		 sm:h-4/5 md:justify-between md:h-3/5 md:w-5/6 md:px-6'>
 			<button
 				onClick={() => {
-					console.log(weatherData);
+					console.log(state);
 				}}>
 				KLIK
 			</button>
 			<SearchBar onClickFunc={e => getWeatherData(e)} />
 			<div className='flex flex-col items-center h-full gap-5 w-full sm:justify-between sm:flex-row'>
 				<InfosContainer>
-					<City>{weatherData.name}</City>
-					<Temperature>{weatherData.main.temp}°C</Temperature>
-					<TemperatureFelt>felt like {weatherData.main.temp}°C</TemperatureFelt>
-					<Weather>{weatherData.weather[0].main}</Weather>
+					<City>{state.name}</City>
+					<Temperature>{state.main.temp}°C</Temperature>
+					<TemperatureFelt>felt like {state.main.temp}°C</TemperatureFelt>
+					<Weather>{state.weather[0].main}</Weather>
 				</InfosContainer>
 				<InfosContainer>
-					<Humidity>{weatherData.main.humidity}</Humidity>
-					<Pressure>{weatherData.main.pressure}</Pressure>
-					<Wind direction='N'>{weatherData.wind.speed}</Wind>
-					<Visibility>{weatherData.visibility}</Visibility>
+					<Humidity>{state.main.humidity}</Humidity>
+					<Pressure>{state.main.pressure}</Pressure>
+					<Wind direction='N'>{state.wind.speed}</Wind>
+					<Visibility>{state.visibility}</Visibility>
 				</InfosContainer>
 				<InfosContainer isIcon={true}>
 					<WeatherIcon iconType='03' />
