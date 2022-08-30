@@ -6,7 +6,7 @@ const Wind = ({ children, direction }: { children: number | null; direction: str
 			<img src={windIcon} className='w-[15px] mr-2' alt='Water drop icon' />
 			<p className='font-light'>Wind:</p>
 			<p className=''>{children}km/h</p>
-			<p className='text-bold text-red-500'> to {direction}</p>
+			<p className='text-bold text-blue-500'> to {direction}</p>
 		</div>
 	);
 };

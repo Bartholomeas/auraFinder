@@ -1,12 +1,16 @@
 import { useEffect } from 'react';
 
 const WeatherIcon = ({ iconType = '01' }: { iconType: string }) => {
+	let iconName = iconType.split('').splice(0, 2).join('');
+
 	return (
-		<img
-			className='order-1 h-full sm:h-[100px] md:h-[100%]'
-			src={`../../../../public/icons/${iconType}.svg`}
-			alt='Current weather icon'
-		/>
+		<>
+			<img
+				className='order-1 h-full sm:h-[100px] md:h-[100%]'
+				src={`../../../../public/icons/${iconName}.svg`}
+				alt='Current weather icon'
+			/>
+		</>
 	);
 };
 

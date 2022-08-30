@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-const SearchBar = ({ onClickFunc }: { onClickFunc: (arg0: any) => Promise<void> }) => {
+const SearchBar = ({
+	onClickFunc,
+	errorStatus,
+}: {
+	onClickFunc: (arg0: any) => Promise<void>;
+	errorStatus: boolean;
+}) => {
 	const [inputValue, setInputValue] = useState('');
+
+	const handleEnterPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+		if (e.code === 'Enter') {
+			onClickFunc(inputValue);
+		}
+	};
 
 	return (
 		<div className='flex justify-center items-end w-fit p-1 border-b-[1px] border-solid border-white'>
 			<div className='flex flex-col items-center'>
-				<label className='opacity-50 translate-x-[20px]' htmlFor='city'>
-					Search city
+				<label className={`opacity-50 translate-x-[20px] ${errorStatus && 'text-red-500 opacity-100'}`} htmlFor='city'>
+					{errorStatus ? 'Cannot find this city' : 'Search city'}
 				</label>
 				<input
 					className='bg-transparent'
@@ -17,6 +29,7 @@ const SearchBar = ({ onClickFunc }: { onClickFunc: (arg0: any) => Promise<void> 
 					onChange={e => {
 						setInputValue(e.target.value);
 					}}
+					onKeyUp={e => handleEnterPress(e)}
 				/>
 			</div>
 			<button

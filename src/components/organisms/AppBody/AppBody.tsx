@@ -15,31 +15,35 @@ import { useWeatherHandler } from '../../../state/useWeatherReducer';
 
 const AppBody = () => {
 	const { state, dispatch } = useWeatherHandler();
+	const [errorStatus, setError] = useState(false);
 
 	const getWeatherData = async (choosenCity: string) => {
+		setError(false);
 		try {
 			const data = await axios.get(
 				`https://api.openweathermap.org/data/2.5/weather?q=${choosenCity}&units=metric&appid=${
 					import.meta.env.VITE_API_KEY
 				}`
 			);
+
 			dispatch({ type: 'SET_WEATHER_DATA', payload: data.data });
 		} catch {
+			setError(true);
 			throw new Error('Something went wrong');
 		}
 	};
 
+	const countWorldDirection = (deg: number): string => {
+		const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+		let index = Math.round(((deg %= 360) < 0 ? deg + 360 : deg) / 45) % 8;
+		return directions[index];
+	};
+
 	return (
 		<div
-			className='flex flex-col items-center gap-3 w-full h-full px-4 py-6 backdrop-blur-sm bg-black/30 rounded-lg text-basic-text 
+			className='flex flex-col items-center gap-3 w-full h-full px-4 py-6 backdrop-blur-sm bg-black/50 rounded-lg text-basic-text 
 		 sm:h-4/5 md:justify-between md:h-3/5 md:w-5/6 md:px-6'>
-			<button
-				onClick={() => {
-					console.log(state);
-				}}>
-				KLIK
-			</button>
-			<SearchBar onClickFunc={e => getWeatherData(e)} />
+			<SearchBar errorStatus={errorStatus} onClickFunc={e => getWeatherData(e)} />
 			<div className='flex flex-col items-center h-full gap-5 w-full sm:justify-between sm:flex-row'>
 				<InfosContainer>
 					<City>{state.name}</City>
@@ -50,11 +54,11 @@ const AppBody = () => {
 				<InfosContainer>
 					<Humidity>{state.main.humidity}</Humidity>
 					<Pressure>{state.main.pressure}</Pressure>
-					<Wind direction='N'>{state.wind.speed}</Wind>
+					<Wind direction={countWorldDirection(state.wind.deg)}>{state.wind.speed}</Wind>
 					<Visibility>{state.visibility}</Visibility>
 				</InfosContainer>
 				<InfosContainer isIcon={true}>
-					<WeatherIcon iconType='03' />
+					<WeatherIcon iconType={state.weather[0].icon} />
 				</InfosContainer>
 			</div>
 		</div>
