@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import React, { useReducer } from 'react';
 
 interface ReducerProps {
 	state: WeatherState;
@@ -10,15 +10,15 @@ interface ReducerAction {
 	payload: any;
 }
 
-interface WeatherState {
+export interface WeatherState {
 	main: {
-		humidity: number | null;
-		pressure: number | null;
-		temp: number | null;
-		feels_like: number | null;
+		humidity: number;
+		pressure: number;
+		temp: number;
+		feels_like: number;
 	};
 	name: string;
-	visibility: number | null;
+	visibility: number;
 	weather: [
 		{
 			icon: string;
@@ -26,27 +26,27 @@ interface WeatherState {
 		}
 	];
 	wind: {
-		deg: number | null;
-		speed: number | null;
+		deg: number;
+		speed: number;
 	};
 }
 
 const initialState: WeatherState = {
 	main: {
-		humidity: null,
-		pressure: null,
-		temp: null,
-		feels_like: null,
+		humidity: 0,
+		pressure: 0,
+		temp: 0,
+		feels_like: 0,
 	},
 	name: '',
-	visibility: null,
+	visibility: 0,
 	weather: [
 		{
 			icon: '03d',
 			main: 'clear',
 		},
 	],
-	wind: { deg: null, speed: null },
+	wind: { deg: 0, speed: 0 },
 };
 
 const weatherDataReducer = (state: ReducerProps, action: ReducerAction): any => {

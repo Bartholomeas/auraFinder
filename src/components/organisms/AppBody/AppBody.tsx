@@ -11,10 +11,10 @@ import Wind from '../../atoms/Wind/Wind';
 import Visibility from '../../atoms/Visibility/Visibility';
 import WeatherIcon from '../../atoms/WeatherIcon/WeatherIcon';
 import SearchBar from '../../atoms/SearchBar/SearchBar';
-import { useWeatherHandler } from '../../../state/useWeatherReducer';
+import { useCustomContext } from '../../../state/useCustomContext';
 
 const AppBody = () => {
-	const { state, dispatch } = useWeatherHandler();
+	const { state, dispatch } = useCustomContext();
 	const [errorStatus, setError] = useState(false);
 
 	const getWeatherData = async (choosenCity: string) => {
@@ -44,7 +44,7 @@ const AppBody = () => {
 			className='flex flex-col items-center gap-3 w-full h-full px-4 py-6 backdrop-blur-sm bg-black/50 rounded-lg text-basic-text 
 		 sm:h-4/5 md:justify-between md:h-3/5 md:w-5/6 md:px-6'>
 			<SearchBar errorStatus={errorStatus} onClickFunc={e => getWeatherData(e)} />
-			<div className='flex flex-col items-center h-full gap-5 w-full sm:justify-between sm:flex-row'>
+			<div className='flex flex-col items-center h-full gap-3 w-full sm:justify-between sm:flex-row'>
 				<InfosContainer>
 					<City>{state.name}</City>
 					<Temperature>{state.main.temp}°C</Temperature>
