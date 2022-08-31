@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useCustomContext } from '../../../state/useCustomContext';
 
 const AppWrapper = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
-	const { state, dispatch } = useCustomContext();
+	const { state } = useCustomContext();
 
 	let imageName = state.weather[0].icon.split('').splice(0, 2).join('') + 'i';
 	const images: any = {
