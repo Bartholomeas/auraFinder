@@ -7,7 +7,7 @@ const WeatherIcon = ({ iconType = '01' }: { iconType: string }) => {
 		<>
 			<img
 				className='order-1 h-full sm:h-[100px] md:h-[100%]'
-				src={`../../../../public/icons/${iconName}.svg`}
+				src={`./icons/${iconName}.svg`}
 				alt='Current weather icon'
 			/>
 		</>

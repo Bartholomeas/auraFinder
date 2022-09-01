@@ -5,4 +5,8 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
 	base: '/auraFinder/',
 	plugins: [react()],
+	build: {
+		outDir: 'dist',
+	},
+	publicDir: 'public',
 });
