@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 const WeatherIcon = ({ iconType = '01' }: { iconType: string }) => {
 	let iconName = iconType.split('').splice(0, 2).join('');
 
