@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useCustomContext } from '../../../state/useCustomContext';
 
 const AppWrapper = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
@@ -16,9 +15,6 @@ const AppWrapper = ({ children }: { children: JSX.Element | JSX.Element[] }) => 
 		'13i': "url('./img/13.jpg')",
 		'50i': "url('./img/50.jpg')",
 	};
-	// console.log(import.meta.env.VITE_API_KEY);
-	const imageUrl = import.meta.url;
-	// console.log(process.env.PUBLIC_URL);
 
 	return (
 		<div

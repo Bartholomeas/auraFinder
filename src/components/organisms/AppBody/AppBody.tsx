@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import City from '../../atoms/City/City';
 import InfosContainer from '../../molecules/InfosContainer/InfosContainer';
@@ -17,7 +17,7 @@ const AppBody = () => {
 	const { state, dispatch } = useCustomContext();
 	const [errorStatus, setError] = useState(false);
 
-	const getWeatherData = async (choosenCity: string) => {
+	const getWeatherData = async (choosenCity: string = 'Krakow') => {
 		setError(false);
 		try {
 			const data = await axios.get(
@@ -38,6 +38,10 @@ const AppBody = () => {
 		let index = Math.round(((deg %= 360) < 0 ? deg + 360 : deg) / 45) % 8;
 		return directions[index];
 	};
+
+	useEffect(() => {
+		getWeatherData('Krakow');
+	}, [getWeatherData]);
 
 	return (
 		<div
